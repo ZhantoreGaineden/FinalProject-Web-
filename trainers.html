@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренеры - Lifestyle Club</title>
+
+  <!-- Шрифты и Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery (Task 0) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ====== Autocomplete Suggestions ====== */
+    #suggestions {
+      position: absolute;
+      z-index: 1000;
+      width: 50%;
+      left: 25%;
+    }
+
+    mark {
+      background: yellow;
+      color: black;
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    /* ====== Toast ====== */
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #ff4040;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 10px;
+      display: none;
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      z-index: 2000;
+    }
+
+    /* Fade-in для карточек */
+    .trainer {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Навигация ====== -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Lifestyle</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link active" href="trainers.html">Тренеры</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Услуги</a></li>
+          <li class="nav-item"><a class="nav-link" href="prices.html">Цены</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactst.html">Контакты</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== Контент ====== -->
+  <section class="container my-5 text-center">
+    <h2 class="fw-bold mb-4">Наши тренеры</h2>
+
+    <!-- ===== Task 2: Autocomplete Input ===== -->
+    <input type="text" id="autoSearch" class="form-control w-50 mx-auto mb-3" placeholder="Введите имя тренера...">
+    <ul id="suggestions" class="list-group mx-auto w-50"></ul>
+
+    <!-- ===== Task 3: Highlight Search ===== -->
+    <input type="text" id="highlightInput" class="form-control w-50 mx-auto mt-4" placeholder="Поиск по описанию (подсветка)...">
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-6 col-lg-3 trainer">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/life2.jpg" class="card-img-top" alt="Альберт Латыпов">
+          <div class="card-body">
+            <h5 class="card-title">Альберт Латыпов</h5>
+            <p class="card-text">Тренер по плаванию и аквааэробике.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 trainer">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/life3.jpg" class="card-img-top" alt="Бауржан Тулебергенов">
+          <div class="card-body">
+            <h5 class="card-title">Бауржан Тулебергенов</h5>
+            <p class="card-text">Специалист по силовым тренировкам.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 trainer">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/life4.jpg" class="card-img-top" alt="Темирлан Филь">
+          <div class="card-body">
+            <h5 class="card-title">Темирлан Филь</h5>
+            <p class="card-text">Эксперт по функциональному тренингу.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 trainer">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/life5.jpg" class="card-img-top" alt="Эдуард Конакбаев">
+          <div class="card-body">
+            <h5 class="card-title">Эдуард Конакбаев</h5>
+            <p class="card-text">Тренер по боксу и единоборствам.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Task 8: Copy Button ===== -->
+    <button id="copyText" class="btn btn-danger mt-4">Скопировать список тренеров</button>
+  </section>
+
+  <!-- Toast -->
+  <div id="toast">Текст скопирован!</div>
+
+  <footer class="bg-dark text-center text-light py-3 mt-5">
+    <p class="mb-0">© 2025. AIZA team (SE-2415)</p>
+  </footer>
+
+  <!-- ===== Bootstrap JS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===== jQuery функционал ===== -->
+  <script>
+  $(document).ready(function(){
+
+    console.log("jQuery connected — Trainers page loaded!");
+
+    // ===== Fade-in эффект при загрузке =====
+    $(".trainer").each(function(i){
+      $(this).delay(i * 250).fadeIn(600);
+    });
+
+    // ===== Task 2: Autocomplete =====
+    const names = ["Альберт", "Бауржан", "Темирлан", "Эдуард"];
+    $("#autoSearch").on("keyup", function(){
+      let input = $(this).val().toLowerCase();
+      $("#suggestions").empty();
+      if(input){
+        names.filter(n => n.toLowerCase().startsWith(input))
+             .forEach(n => $("#suggestions").append(`<li class='list-group-item list-group-item-action'>${n}</li>`));
+      }
+    });
+
+    $("#suggestions").on("click", "li", function(){
+      $("#autoSearch").val($(this).text());
+      $("#suggestions").empty();
+      $("#toast").text("Вы выбрали тренера: " + $(this).text()).fadeIn(400).delay(2000).fadeOut(500);
+    });
+
+    // ===== Task 3: Highlight Search =====
+    $("#highlightInput").on("keyup", function(){
+      let term = $(this).val().trim();
+      $(".card-text").each(function(){
+        let text = $(this).text();
+        if(term){
+          let regex = new RegExp(`(${term})`, "gi");
+          $(this).html(text.replace(regex, "<mark>$1</mark>"));
+        } else {
+          $(this).text(text);
+        }
+      });
+    });
+
+    // ===== Task 8: Copy Button + Toast =====
+    $("#copyText").on("click", function(){
+      let allNames = $(".card-title").map(function(){ return $(this).text(); }).get().join(", ");
+      navigator.clipboard.writeText(allNames);
+      $("#toast").text("Список тренеров скопирован!").fadeIn(400).delay(2000).fadeOut(500);
+    });
+
+  });
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const darkBtn = document.getElementById("darkBtn");
+  const lightBtn = document.getElementById("lightBtn");
+
+  // Load saved theme
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") {
+    document.body.classList.add("light-mode");
+  }
+
+  darkBtn.onclick = () => {
+    document.body.classList.remove("light-mode");
+    localStorage.setItem("theme", "dark");
+  };
+
+  lightBtn.onclick = () => {
+    document.body.classList.add("light-mode");
+    localStorage.setItem("theme", "light");
+  };
+});
+</script>
+</body>
+</html>

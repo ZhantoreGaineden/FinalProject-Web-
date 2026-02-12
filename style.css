@@ -1,0 +1,404 @@
+/* ====== Общие стили ====== */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.6s ease;
+}
+
+h1, h2, h3, h5 {
+  font-weight: 600;
+}
+
+p {
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+/* ====== Навигация ====== */
+.navbar-brand {
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+}
+
+/* ====== Hero ====== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 60vh;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #bbb;
+}
+
+.hero .btn {
+  border-radius: 25px;
+  padding: 10px 25px;
+  transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+  background-color: #ff4040;
+  color: white;
+  transform: scale(1.05);
+}
+
+.hero-img-fix {
+  max-height: 400px;
+  border-radius: 15px;
+  transition: transform 0.4s ease;
+}
+
+.hero-img-fix:hover {
+  transform: scale(1.03);
+}
+
+/* ====== Accordion (FAQ) ====== */
+.accordion-item {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.accordion-title {
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.accordion-title.active {
+  color: #ff4040;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+/* ====== Popup ====== */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ff4040;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+/* ====== Отзывы ====== */
+#reviews {
+  background: #111;
+  border-radius: 15px;
+  padding: 40px 20px;
+}
+
+.review-card {
+  background: #181818;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 64, 64, 0.4);
+}
+
+/* ====== Footer ====== */
+footer {
+  background: #111;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* ====== Кнопки ====== */
+.btn-outline-light:hover {
+  background-color: #ff4040;
+  border-color: #ff4040;
+}
+
+/* ====== Media Queries ====== */
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .hero-img-fix {
+    max-height: 300px;
+    margin-top: 20px;
+  }
+}
+
+/* ===== Светлая тема — универсальные стили ===== */
+.light-mode {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.light-mode p {
+  color: #333 !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6 {
+  color: #000 !important;
+}
+
+/* Навбар светлый */
+.light-mode .navbar {
+  background-color: #f5f5f5 !important;
+}
+
+/* Footer светлый */
+.light-mode footer {
+  background-color: #f1f1f1 !important;
+  color: #000 !important;
+}
+
+/* ===== ОТЗЫВЫ — 100% РАБОТАЮЩЕЕ РЕШЕНИЕ ===== */
+.light-mode #reviews {
+  background-color: #ffffff !important;
+}
+
+.light-mode .review-card {
+  background-color: #ffffff !important;
+  color: #000 !important;
+  border: 1px solid #ddd !important;
+}
+
+/* убиваем Bootstrap */
+.light-mode .review-card.bg-dark {
+  background-color: #ffffff !important;
+}
+
+.light-mode .review-card.text-light {
+  color: #000 !important;
+}
+
+/* текст внутри карточки */
+.light-mode .review-card h5,
+.light-mode .review-card p {
+  color: #000 !important;
+}
+
+
+/* ====== Рамка контейнера "Отзывы клиентов" (soft effect) ====== */
+
+/* Тёмная тема (по умолчанию) */
+#reviews {
+  border: 2px solid rgba(255, 255, 255, 0.2); /* мягкая белая рамка */
+}
+
+/* Светлая тема */
+.light-mode #reviews {
+  border: 2px solid rgba(0, 0, 0, 0.3); /* мягкая чёрная рамка */
+}
+
+
+/* ====== Рамка секции "Наши достижения" (soft effect) ====== */
+
+/* Тёмная тема */
+.achievements-section {
+  border: 2px solid rgba(255, 255, 255, 0.2); /* мягкая белая рамка */
+  border-radius: 15px;
+  padding: 30px;
+}
+
+/* Светлая тема */
+.light-mode .achievements-section {
+  border: 2px solid rgba(0, 0, 0, 0.3); /* мягкая чёрная рамка */
+  background-color: #fff !important;
+}
+
+/* Светлая тема — исправляем меню */
+.light-mode .navbar {
+  background-color: #ffffff !important;
+  color: #000 !important;
+}
+
+/* ссылки меню */
+.light-mode .navbar .nav-link {
+  color: #000 !important;
+}
+
+/* активная ссылка */
+.light-mode .navbar .nav-link.active {
+  color: #ff4040 !important;
+  font-weight: 600;
+}
+
+/* бренд (Lifestyle) */
+.light-mode .navbar-brand {
+  color: #000 !important;
+}
+
+/* кнопка-бургер */
+.light-mode .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+
+
+/* ===== Светлый режим — основной текст ===== */
+.light-mode,
+.light-mode p,
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6,
+.light-mode span,
+.light-mode a,
+.light-mode .nav-link {
+  color: #000 !important;
+}
+
+/* Навбар */
+.light-mode .navbar {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+.light-mode .navbar-brand,
+.light-mode .navbar .nav-link {
+  color: #000 !important;
+}
+.light-mode .navbar .nav-link.active {
+  color: #ff4040 !important;
+}
+.light-mode .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Карточки */
+.light-mode .card,
+.light-mode .trainer .card,
+.light-mode .price-card,
+.light-mode .review-card {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Футер */
+.light-mode footer {
+  background: #f2f2f2 !important;
+  color: #000 !important;
+}
+
+/* Контейнер Отзывы */
+#reviews {
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 20px;
+}
+.light-mode #reviews {
+  border-color: rgba(0,0,0,0.3);
+}
+
+/* Наши достижения */
+.achievements-section {
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 20px;
+}
+.light-mode .achievements-section {
+  border-color: rgba(0,0,0,0.3);
+}
+
+/* Темные карточки вручную */
+.light-mode .bg-dark {
+  background: #fff !important;
+  color: #000 !important;
+}
+.light-mode .text-light {
+  color: #000 !important;
+}
+
+/* Кнопки */
+.theme-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 18px;
+}
+.light-mode .btn-outline-light {
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+
+/* ===== СЕРЫЙ NAVBAR В СВЕТЛОЙ ТЕМЕ ===== */
+
+.light-mode .navbar {
+  background-color: #e6e6e6 !important;  /* ✅ светло-серый */
+  color: #000 !important;
+  transition: background-color 0.3s ease;
+}
+
+/* ссылки */
+.light-mode .navbar .nav-link {
+  color: #000 !important;
+}
+
+/* активная вкладка */
+.light-mode .navbar .nav-link.active {
+  color: #ff4040 !important;
+  font-weight: 600;
+}
+
+/* бренд Lifestyle */
+.light-mode .navbar-brand {
+  color: #000 !important;
+}
+
+/* бургер кнопка */
+.light-mode .navbar-toggler-icon {
+  filter: invert(1);
+}

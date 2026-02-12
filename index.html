@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifestyle Club</title>
+
+  <!-- Fonts & Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Scroll Bar */
+    #scrollBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #ff4040, #007bff);
+      width: 0%;
+      z-index: 9999;
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff4040;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 8px;
+      display: none;
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 2000;
+    }
+
+    /* Light mode fixes */
+    .light-mode .navbar {
+      background: #e6e6e6 !important;
+      color: #000 !important;
+    }
+    .light-mode .navbar .nav-link,
+    .light-mode .navbar-brand {
+      color: #000 !important;
+    }
+    .light-mode .navbar .nav-link.active {
+      color: #ff4040 !important;
+      font-weight: 600;
+    }
+    .light-mode .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .light-mode footer {
+      background: #f1f1f1 !important;
+      color: #000 !important;
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 18px;
+      padding: 0;
+    }
+
+    .light-mode .review-card,
+    .light-mode .card {
+      background: #fff !important;
+      color: #000 !important;
+      border: 1px solid #ddd;
+    }
+
+    .light-mode #reviews {
+      background: #fff !important;
+      border: 2px solid rgba(0,0,0,0.3);
+    }
+
+    .light-mode .achievements-section {
+      background: #fff !important;
+      border: 2px solid rgba(0,0,0,0.3);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Scroll Bar -->
+  <div id="scrollBar"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Lifestyle</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="trainers.html">Тренеры</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Услуги</a></li>
+          <li class="nav-item"><a class="nav-link" href="prices.html">Цены</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactst.html">Контакты</a></li>
+        </ul>
+
+        <!-- Theme Buttons -->
+        <div class="d-flex align-items-center ms-3">
+          <button id="darkBtn" class="btn btn-outline-light theme-btn">🌙</button>
+          <button id="lightBtn" class="btn btn-outline-light theme-btn ms-2">☀️</button>
+        </div>
+
+        <!-- 🔐 Login/Profile Link -->
+        <ul class="navbar-nav ms-3">
+          <li class="nav-item">
+            <a id="loginLink" class="nav-link text-danger fw-semibold" href="login.html">Войти в аккаунт</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="container py-5 hero d-flex align-items-center flex-wrap">
+    <div class="col-lg-6 col-md-12 mb-4">
+      <h1 class="fw-bold">Лучшие всегда с нами</h1>
+      <p>Подберем абонемент и составим план тренировок</p>
+
+      <a href="https://api.whatsapp.com/send/?phone=7072720806&text=Здравствуйте!+Хочу+начать+тренироваться+у+вас!"
+        class="btn btn-light fw-semibold mt-3">Начать тренироваться</a>
+
+      <select id="langSelect" class="form-select w-auto mt-3">
+        <option value="ru" selected>Русский</option>
+        <option value="en">English</option>
+        <option value="kz">Қазақша</option>
+      </select>
+      <p id="greeting" class="mt-2">Добро пожаловать в Lifestyle Club!</p>
+    </div>
+
+    <div class="col-lg-6 col-md-12 text-center">
+      <img src="image/life1.jpg" class="img-fluid rounded shadow-lg hero-img-fix lazy">
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="container my-5 text-center">
+    <h2 class="fw-bold mb-4">Отзывы клиентов</h2>
+
+    <input type="text" id="searchInput" class="form-control w-50 mx-auto mb-4" placeholder="Поиск отзывов...">
+
+    <div id="reviewsContainer" class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="p-3 bg-dark text-light rounded shadow-sm review-card">
+          <h5>Айдана</h5>
+          <p>Отличные тренеры и атмосфера!</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-3 bg-dark text-light rounded shadow-sm review-card">
+          <h5>Данияр</h5>
+          <p>Классный зал, рекомендую!</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-3 bg-dark text-light rounded shadow-sm review-card">
+          <h5>Марина</h5>
+          <p>После тренировок чувствую себя прекрасно.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTERS -->
+  <section class="container text-center my-5 achievements-section">
+    <h2 class="fw-bold">Наши достижения</h2>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <h3 class="counter" data-count="1000">0</h3>
+        <p>Клиентов</p>
+      </div>
+      <div class="col-4">
+        <h3 class="counter" data-count="50">0</h3>
+        <p>Тренеров</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COPY BUTTON -->
+  <div class="container text-center my-5">
+    <p id="copyText">Lifestyle Club</p>
+    <button id="copyBtn" class="btn btn-danger">Копировать</button>
+  </div>
+
+  <footer class="bg-dark text-center text-light py-3 mt-5">
+    <p class="mb-0">© 2025. AIZA team (SE-2415)</p>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast-msg"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- jQuery Scripts -->
+  <script>
+  $(document).ready(function() {
+    $("#searchInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $(".review-card").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+
+    $(window).on("scroll", function() {
+      let scrollTop = $(window).scrollTop();
+      let height = $(document).height() - $(window).height();
+      let progress = (scrollTop / height) * 100;
+      $("#scrollBar").css("width", progress + "%");
+    });
+
+    $(window).on("scroll", function() {
+      $(".counter").each(function() {
+        var $this = $(this);
+        if ($this.offset().top < $(window).scrollTop() + $(window).height()) {
+          if (!$this.hasClass("counted")) {
+            $this.addClass("counted");
+            $({ countNum: 0 }).animate({ countNum: $this.data("count") }, {
+              duration: 2000,
+              easing: "swing",
+              step: function() { $this.text(Math.floor(this.countNum)); },
+              complete: function() { $this.text(this.countNum); }
+            });
+          }
+        }
+      });
+    });
+  });
+  </script>
+
+  <!-- Theme Switch -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const darkBtn = document.getElementById("darkBtn");
+    const lightBtn = document.getElementById("lightBtn");
+
+    const saved = localStorage.getItem("theme");
+    if (saved === "light") document.body.classList.add("light-mode");
+
+    darkBtn.onclick = () => {
+      document.body.classList.remove("light-mode");
+      localStorage.setItem("theme", "dark");
+    };
+
+    lightBtn.onclick = () => {
+      document.body.classList.add("light-mode");
+      localStorage.setItem("theme", "light");
+    };
+
+    // 🔐 Обновление ссылки входа
+    const loginLink = document.getElementById("loginLink");
+    const loggedIn = localStorage.getItem("loggedIn");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (loggedIn === "true" && user) {
+      loginLink.textContent = "Профиль";
+      loginLink.href = "profile.html";
+    } else {
+      loginLink.textContent = "Войти в аккаунт";
+      loginLink.href = "login.html";
+    }
+  });
+  </script>
+
+  <!-- Copy button -->
+  <script>
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    const text = document.getElementById("copyText").innerText;
+    navigator.clipboard.writeText(text)
+      .then(() => showToast("Скопировано ✅"))
+      .catch(() => showToast("Ошибка 😢"));
+  });
+
+  function showToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.innerText = msg;
+    $(toast).fadeIn(300);
+    setTimeout(() => { $(toast).fadeOut(300); }, 1500);
+  }
+  </script>
+
+  <!-- CLICK SOUND -->
+  <audio id="clickSound" src="click.wav"></audio>
+  <script>
+  function playClick() {
+    document.getElementById("clickSound").play();
+  }
+  document.querySelectorAll("button, .btn, .nav-link").forEach(el => {
+    el.addEventListener("click", playClick);
+  });
+  </script>
+
+  <!-- WEATHER API -->
+<section class="container text-center my-5">
+  <h2 id="weatherTitle" class="fw-bold">Погода в Астане</h2>
+  <p id="weather" class="fs-5 text-secondary">Загрузка...</p>
+</section>
+
+  <script>
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=51.17&longitude=71.43&current_weather=true")
+    .then(res => res.json())
+    .then(data => {
+      const t = data.current_weather.temperature;
+      const w = data.current_weather.windspeed;
+      document.getElementById("weather").textContent = `Температура: ${t}°C | Ветер: ${w} км/ч`;
+    })
+    .catch(() => {
+      document.getElementById("weather").textContent = "Ошибка загрузки погоды";
+    });
+  </script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("langSelect");
+  const savedLang = localStorage.getItem("lang") || "ru";
+  select.value = savedLang;
+  updateLanguage(savedLang);
+
+  select.addEventListener("change", () => {
+    const lang = select.value;
+    localStorage.setItem("lang", lang);
+    updateLanguage(lang);
+  });
+
+  async function updateLanguage(lang) {
+    const greeting = document.getElementById("greeting");
+    const heroTitle = document.querySelector(".hero h1");
+    const heroText = document.querySelector(".hero p");
+    const heroBtn = document.querySelector(".hero .btn");
+    const nav = document.querySelectorAll(".navbar .nav-link");
+    const reviewsTitle = document.querySelector("#reviews h2");
+    const searchInput = document.getElementById("searchInput");
+    const counterTitle = document.querySelector(".achievements-section h2");
+    const clientsText = document.querySelectorAll(".achievements-section p")[0];
+    const trainersText = document.querySelectorAll(".achievements-section p")[1];
+    const copyBtn = document.getElementById("copyBtn");
+    const copyText = document.getElementById("copyText");
+    const footer = document.querySelector("footer p");
+    const weatherTitle = document.getElementById("weatherTitle");
+    const weather = document.getElementById("weather");
+    const loginBtn = document.getElementById("loginBtn");
+
+    // -------- Русский --------
+    if (lang === "ru") {
+      document.title = "Lifestyle Club — Главная";
+      greeting.textContent = "Добро пожаловать в Lifestyle Club!";
+      heroTitle.textContent = "Лучшие всегда с нами";
+      heroText.textContent = "Подберем абонемент и составим план тренировок";
+      heroBtn.textContent = "Начать тренироваться";
+
+      nav[0].textContent = "Главная";
+      nav[1].textContent = "Тренеры";
+      nav[2].textContent = "Услуги";
+      nav[3].textContent = "Цены";
+      nav[4].textContent = "Контакты";
+
+      if (loginBtn) loginBtn.textContent = "Войти в аккаунт";
+
+      reviewsTitle.textContent = "Отзывы клиентов";
+      searchInput.placeholder = "Поиск отзывов...";
+      document.querySelectorAll(".review-card h5")[0].textContent = "Айдана";
+      document.querySelectorAll(".review-card p")[0].textContent = "Отличные тренеры и атмосфера!";
+      document.querySelectorAll(".review-card h5")[1].textContent = "Данияр";
+      document.querySelectorAll(".review-card p")[1].textContent = "Классный зал, рекомендую!";
+      document.querySelectorAll(".review-card h5")[2].textContent = "Марина";
+      document.querySelectorAll(".review-card p")[2].textContent = "После тренировок чувствую себя прекрасно.";
+
+      counterTitle.textContent = "Наши достижения";
+      clientsText.textContent = "Клиентов";
+      trainersText.textContent = "Тренеров";
+
+      copyBtn.textContent = "Копировать";
+      copyText.textContent = "Lifestyle Club";
+
+      if (weatherTitle) weatherTitle.textContent = "Погода в Астане";
+      updateWeather("ru");
+
+      footer.textContent = "© 2025. AIZA team (SE-2415)";
+    }
+
+    // -------- English --------
+    if (lang === "en") {
+      document.title = "Lifestyle Club — Home";
+      greeting.textContent = "Welcome to Lifestyle Club!";
+      heroTitle.textContent = "The Best Train With Us";
+      heroText.textContent = "We’ll help you choose a membership and create your workout plan";
+      heroBtn.textContent = "Start Training";
+
+      nav[0].textContent = "Home";
+      nav[1].textContent = "Trainers";
+      nav[2].textContent = "Services";
+      nav[3].textContent = "Prices";
+      nav[4].textContent = "Contacts";
+
+      if (loginBtn) loginBtn.textContent = "Login";
+
+      reviewsTitle.textContent = "Client Reviews";
+      searchInput.placeholder = "Search reviews...";
+      document.querySelectorAll(".review-card h5")[0].textContent = "Aidan";
+      document.querySelectorAll(".review-card p")[0].textContent = "Excellent coaches and atmosphere!";
+      document.querySelectorAll(".review-card h5")[1].textContent = "Daniyar";
+      document.querySelectorAll(".review-card p")[1].textContent = "Great gym, I recommend it!";
+      document.querySelectorAll(".review-card h5")[2].textContent = "Marina";
+      document.querySelectorAll(".review-card p")[2].textContent = "I feel amazing after workouts.";
+
+      counterTitle.textContent = "Our Achievements";
+      clientsText.textContent = "Clients";
+      trainersText.textContent = "Trainers";
+
+      copyBtn.textContent = "Copy";
+      copyText.textContent = "Lifestyle Club";
+
+      if (weatherTitle) weatherTitle.textContent = "Weather in Astana";
+      updateWeather("en");
+
+      footer.textContent = "© 2025. AIZA team (SE-2415)";
+    }
+
+    // -------- Қазақша --------
+    if (lang === "kz") {
+      document.title = "Lifestyle Club — Басты бет";
+      greeting.textContent = "Lifestyle Club-қа қош келдіңіз!";
+      heroTitle.textContent = "Ең үздіктер бізбен бірге";
+      heroText.textContent = "Біз сізге абонемент таңдап, жаттығу жоспарын жасаймыз";
+      heroBtn.textContent = "Жаттығуды бастау";
+
+      nav[0].textContent = "Басты бет";
+      nav[1].textContent = "Жаттықтырушылар";
+      nav[2].textContent = "Қызметтер";
+      nav[3].textContent = "Бағалар";
+      nav[4].textContent = "Байланыс";
+
+      if (loginBtn) loginBtn.textContent = "Кіру";
+
+      reviewsTitle.textContent = "Клиенттердің пікірлері";
+      searchInput.placeholder = "Пікірлерді іздеу...";
+      document.querySelectorAll(".review-card h5")[0].textContent = "Айдана";
+      document.querySelectorAll(".review-card p")[0].textContent = "Тамаша жаттықтырушылар мен атмосфера!";
+      document.querySelectorAll(".review-card h5")[1].textContent = "Данияр";
+      document.querySelectorAll(".review-card p")[1].textContent = "Керемет зал, ұсынамын!";
+      document.querySelectorAll(".review-card h5")[2].textContent = "Марина";
+      document.querySelectorAll(".review-card p")[2].textContent = "Жаттығудан кейін өзімді тамаша сезінемін.";
+
+      counterTitle.textContent = "Біздің жетістіктер";
+      clientsText.textContent = "Клиенттер";
+      trainersText.textContent = "Жаттықтырушылар";
+
+      copyBtn.textContent = "Көшіру";
+      copyText.textContent = "Lifestyle Club";
+
+      if (weatherTitle) weatherTitle.textContent = "Астанадағы ауа райы";
+      updateWeather("kz");
+
+      footer.textContent = "© 2025. AIZA team (SE-2415)";
+    }
+  }
+
+  // --- Обновление погоды с переводом ---
+  function updateWeather(lang) {
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=51.17&longitude=71.43&current_weather=true")
+      .then(res => res.json())
+      .then(data => {
+        const t = data.current_weather.temperature;
+        const w = data.current_weather.windspeed;
+        let text = "";
+        if (lang === "ru") text = `Температура: ${t}°C | Ветер: ${w} км/ч`;
+        if (lang === "en") text = `Temperature: ${t}°C | Wind: ${w} km/h`;
+        if (lang === "kz") text = `Температура: ${t}°C | Жел: ${w} км/сағ`;
+        document.getElementById("weather").textContent = text;
+      })
+      .catch(() => {
+        document.getElementById("weather").textContent = 
+          lang === "en" ? "Weather loading error" :
+          lang === "kz" ? "Ауа райын жүктеу қатесі" :
+          "Ошибка загрузки погоды";
+      });
+  }
+});
+</script>
+</body>
+</html>

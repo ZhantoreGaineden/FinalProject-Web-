@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Персональные тренировки - Lifestyle Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Навигация -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Lifestyle</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="trainers.html">Тренеры</a></li>
+          <li class="nav-item"><a class="nav-link active" href="services.html">Услуги</a></li>
+          <li class="nav-item"><a class="nav-link" href="prices.html">Цены</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactst.html">Контакты</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Контент -->
+  <section class="container my-5 text-center">
+    <h2 class="fw-bold mb-3">Персональные тренировки</h2>
+    <p class="text-secondary mb-5">Выберите программу под ваши цели:</p>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/p2.jpg" class="card-img-top" alt="Похудение">
+          <div class="card-body">
+            <h5 class="card-title">Похудение</h5>
+            <p class="card-text">Тренировки с акцентом на кардио и контроль питания.</p>
+            <a href="https://api.whatsapp.com/send/?phone=7072720806&text=Здравствуйте!+Хочу+начать+Похудение">
+            <button class="btn btn-danger w-100">Записаться</button></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/p3.jpg" class="card-img-top" alt="Набор массы">
+          <div class="card-body">
+            <h5 class="card-title">Набор массы</h5>
+            <p class="card-text">Силовые занятия для роста мышечной массы и силы.</p>
+            <a href="https://api.whatsapp.com/send/?phone=7072720806&text=Здравствуйте!+Хочу+начать+Набор массы">
+            <button class="btn btn-danger w-100">Записаться</button></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-dark text-light h-100">
+          <img src="image/p1.jpg" class="card-img-top" alt="Функциональный тренинг">
+          <div class="card-body">
+            <h5 class="card-title">Функциональный тренинг</h5>
+            <p class="card-text">Развитие выносливости, гибкости и общей физической формы.</p>
+            <a href="https://api.whatsapp.com/send/?phone=7072720806&text=Здравствуйте!+Хочу+начать+Функциональный тренинг">
+            <button class="btn btn-danger w-100">Записаться</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-center text-light py-3 mt-5">
+    <p class="mb-0">© 2025. AIZA team (SE-2415)</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const darkBtn = document.getElementById("darkBtn");
+  const lightBtn = document.getElementById("lightBtn");
+
+  // Load saved theme
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") {
+    document.body.classList.add("light-mode");
+  }
+
+  darkBtn.onclick = () => {
+    document.body.classList.remove("light-mode");
+    localStorage.setItem("theme", "dark");
+  };
+
+  lightBtn.onclick = () => {
+    document.body.classList.add("light-mode");
+    localStorage.setItem("theme", "light");
+  };
+});
+</script>
+</body>
+</html>
